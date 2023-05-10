@@ -7,6 +7,8 @@ public class Timer : MonoBehaviour
     [SerializeField] float timeToAnswerQuestion = 30f;
     [SerializeField] float timeInBetweenQuestion = 5f;
     public bool isAnsweringQuestion = false;
+    bool loadNextQuestion = false;
+    float fillFraction;
     float timerValue;
 
     // Update is called once per frame
@@ -19,7 +21,15 @@ public class Timer : MonoBehaviour
     {
        timerValue -= Time.deltaTime;
 
-        if (timerValue <= 0 && isAnsweringQuestion)
+        if (timerValue > 0) {
+            if (isAnsweringQuestion)
+            {
+                fillFraction = timerValue / timeToAnswerQuestion;
+            } else 
+            {
+                fillFraction = timerValue / timeInBetweenQuestion;
+            }
+        } else if (timerValue <= 0 && isAnsweringQuestion)
         {
             timerValue = timeInBetweenQuestion;
             isAnsweringQuestion = !isAnsweringQuestion;
@@ -28,8 +38,24 @@ public class Timer : MonoBehaviour
         {
             timerValue = timeToAnswerQuestion;
             isAnsweringQuestion = !isAnsweringQuestion;
+            loadNextQuestion = true;
         }
 
-        Debug.Log(timerValue); 
+        Debug.Log(timerValue + " is equal to fill value: " + fillFraction); 
+    }
+
+    public float GetFillFractionValue()
+    {
+        return fillFraction;
+    }
+
+    public bool GetLoadNextQuestionValue()
+    {
+        return loadNextQuestion;
+    }
+
+    public void CancelTimer()
+    {
+        timerValue = 0;
     }
 }
