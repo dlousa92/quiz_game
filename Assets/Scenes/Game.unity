@@ -237,7 +237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToAnswerQuestion: 6
   timeInBetweenQuestion: 3
-  isAnsweringQuestion: 1
+  isAnsweringQuestion: 0
+  fillFraction: 0
 --- !u!1 &222851287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3380989207770217115, guid: 67778bab3279b4cdbb2ab86ffc7d9288, type: 3}
