@@ -13,3 +13,9 @@ MonoBehaviour:
   m_Name: Question5
   m_EditorClassIdentifier: 
   question: Running console.log('html') in your Javascript file will do what?
+  answers:
+  - Link your JS file to your HTML file
+  - Call a function named html
+  - Summon the kraken
+  - Write the string 'hrml' to your console
+  correctAnswerIndex: 3

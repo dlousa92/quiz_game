@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   question: Running the command "git init" on a directory in your folder will do
     what?
+  answers:
+  - Will create a remote Github repository
+  - Initiate a repository locally
+  - Make the directory sentient
+  - Stage your changes
+  correctAnswerIndex: 1

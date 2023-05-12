@@ -235,10 +235,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 709cc53000a70422c873369205742f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToAnswerQuestion: 6
-  timeInBetweenQuestion: 3
+  timeToAnswerQuestion: 10
+  timeInBetweenQuestion: 4
   isAnsweringQuestion: 0
-  fillFraction: 0
 --- !u!1 &222851287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3380989207770217115, guid: 67778bab3279b4cdbb2ab86ffc7d9288, type: 3}
@@ -776,7 +775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 776.2197, y: 94.95923}
+  m_AnchoredPosition: {x: 740, y: -615}
   m_SizeDelta: {x: 125, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &857557583
@@ -1068,7 +1067,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentQuestionDisplay: {fileID: 1253924276}
-  currentQuestion: {fileID: 11400000, guid: 8cd939c4683914b709b968628aad5c9b, type: 2}
+  questions:
+  - {fileID: 11400000, guid: 8cd939c4683914b709b968628aad5c9b, type: 2}
+  - {fileID: 11400000, guid: 8df2a92687d474b5291075a89776b3d5, type: 2}
+  - {fileID: 11400000, guid: c62d2edb668e84a69a0cef03164d8b2d, type: 2}
+  - {fileID: 11400000, guid: f3b26f3c70fe34c51add046ff0a04571, type: 2}
+  - {fileID: 11400000, guid: d3855fb7f425e461d808c7a6076d6581, type: 2}
   answerButtons:
   - {fileID: 222851287}
   - {fileID: 1225516834}
@@ -1076,6 +1080,7 @@ MonoBehaviour:
   - {fileID: 1885086766}
   defaultSprite: {fileID: 21300000, guid: 7a87bbbacc73d462f9935352a6b2b714, type: 3}
   correctAnswerSprite: {fileID: 21300000, guid: a09a6494e0edd4712b8dd85f7f5c1722, type: 3}
+  timerImage: {fileID: 857557583}
 --- !u!1 &1154545191
 GameObject:
   m_ObjectHideFlags: 0
