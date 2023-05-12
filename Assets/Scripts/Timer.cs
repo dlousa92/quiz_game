@@ -40,8 +40,6 @@ public class Timer : MonoBehaviour
             isAnsweringQuestion = !isAnsweringQuestion;
             loadNextQuestion = true;
         }
-
-        Debug.Log(timerValue + " is equal to fill value: " + fillFraction); 
     }
 
     public float GetFillFractionValue()
@@ -52,6 +50,11 @@ public class Timer : MonoBehaviour
     public bool GetLoadNextQuestionValue()
     {
         return loadNextQuestion;
+    }
+
+    public void SetLoadNextQuestionValue()
+    {
+        loadNextQuestion = !loadNextQuestion;
     }
 
     public void CancelTimer()

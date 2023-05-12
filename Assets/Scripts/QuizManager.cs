@@ -6,23 +6,59 @@ using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
+    [Header("Questions")]
     [SerializeField] TextMeshProUGUI currentQuestionDisplay;
-    [SerializeField] QuestionSO currentQuestion;
+    QuestionSO currentQuestion;
+    [SerializeField] List<QuestionSO> questions = new List<QuestionSO>();
+    [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
+    [Header("Sprites")]
     [SerializeField] Sprite defaultSprite;
     [SerializeField] Sprite correctAnswerSprite;
+    [Header("Timer")]
+    [SerializeField] Image timerImage;
+    Timer timer;
+    bool didAnswerEarly = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        GetNextQuestion();
+        timer = FindObjectOfType<Timer>();
+    }
+
+    void Update()
+    {
+        float fillFractionValue = timer.GetFillFractionValue();
+        timerImage.fillAmount = fillFractionValue;
+
+        if (timer.GetLoadNextQuestionValue())
+        {
+            didAnswerEarly = false;
+            GetNextQuestion();
+            timer.SetLoadNextQuestionValue();
+        } else if (!didAnswerEarly && !timer.isAnsweringQuestion)
+        {
+            CheckCorrectAnswer(-1);
+            SetButtonState(false);
+        }
     }
 
     void GetNextQuestion() 
     {
-        DisplayQuestion();
-        SetButtonState(true);
-        SetButtonDefaultSprites();
+        if (questions.Count > 0)
+        {
+            GetRandomQuestion();
+            DisplayQuestion();
+            SetButtonState(true);
+            SetButtonDefaultSprites();
+        } 
+    }
+
+    void GetRandomQuestion()
+    {
+        int index = Random.Range(0, questions.Count);
+        currentQuestion = questions[index];
+        questions.Remove(currentQuestion);
     }
 
     //Displays the current question in the UI
@@ -45,27 +81,31 @@ public class QuizManager : MonoBehaviour
         }
     }
     // Checks if the answer is correct and changes ui sprite of correct answer button
-    public void OnAnswerSelected(int index)
+    void CheckCorrectAnswer(int index)
     {
         Image buttonImage;
+        int correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
 
-        
-        if (index == currentQuestion.GetCorrectAnswerIndex())
+        if (index == correctAnswerIndex)
         {
             buttonImage = answerButtons[index].GetComponentInChildren<Image>();
 
-            currentQuestionDisplay.text = "Yay!";
+            currentQuestionDisplay.text = "Yay! That's correct.";
             buttonImage.sprite = correctAnswerSprite;
         } else
         {
-            int correctAnswerIndex = currentQuestion.GetCorrectAnswerIndex();
             buttonImage = answerButtons[correctAnswerIndex].GetComponentInChildren<Image>();
-
-            currentQuestionDisplay.text = "Sorry the correct answer is: " + currentQuestion.GetAnswer(correctAnswerIndex);
+            currentQuestionDisplay.text = "Sorry the correct answer is: " + currentQuestion.GetAnswer(correctAnswerIndex) + ".";
             buttonImage.sprite = correctAnswerSprite;
         }
-
+    }
+    
+    public void OnAnswerSelected(int index)
+    {
+        CheckCorrectAnswer(index);
         SetButtonState(false);
+        didAnswerEarly = !didAnswerEarly;
+        timer.CancelTimer();
     }
 
     //disables and enables buttons in UI
