@@ -17,5 +17,5 @@ MonoBehaviour:
   - Link your JS file to your HTML file
   - Call a function named html
   - Summon the kraken
-  - Write the string 'hrml' to your console
+  - Write the string 'html' to your console
   correctAnswerIndex: 3

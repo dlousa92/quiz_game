@@ -21,13 +21,18 @@ public class QuizManager : MonoBehaviour
     [Header("Score")]
     [SerializeField] TextMeshProUGUI currentScoreDisplay;
     ScoreKeeper scoreKeeper;
+    [Header("Progress Bar")]
+    [SerializeField] Slider progressBar;
     bool didAnswerEarly = false;
+    bool completedGame;
 
     // Start is called before the first frame update
     void Start()
     {
         timer = FindObjectOfType<Timer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        progressBar.maxValue = questions.Count;
+        progressBar.value = 0;
     }
 
     void Update()
@@ -54,6 +59,7 @@ public class QuizManager : MonoBehaviour
             GetRandomQuestion();
             DisplayQuestion();
             scoreKeeper.IncrementQuestionsSeen();
+            progressBar.value++;
             SetButtonState(true);
             SetButtonDefaultSprites();
         } 
@@ -116,6 +122,11 @@ public class QuizManager : MonoBehaviour
         SetButtonState(false);
         didAnswerEarly = !didAnswerEarly;
         timer.CancelTimer();
+
+        if (progressBar.value == progressBar.maxValue)
+        {
+            completedGame = true;
+        }
     }
 
     //Disables and enables buttons in UI
