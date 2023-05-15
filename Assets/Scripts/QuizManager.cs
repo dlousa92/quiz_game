@@ -18,12 +18,16 @@ public class QuizManager : MonoBehaviour
     [Header("Timer")]
     [SerializeField] Image timerImage;
     Timer timer;
+    [Header("Score")]
+    [SerializeField] TextMeshProUGUI currentScoreDisplay;
+    ScoreKeeper scoreKeeper;
     bool didAnswerEarly = false;
 
     // Start is called before the first frame update
     void Start()
     {
         timer = FindObjectOfType<Timer>();
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
     void Update()
@@ -49,6 +53,7 @@ public class QuizManager : MonoBehaviour
         {
             GetRandomQuestion();
             DisplayQuestion();
+            scoreKeeper.IncrementQuestionsSeen();
             SetButtonState(true);
             SetButtonDefaultSprites();
         } 
@@ -89,10 +94,13 @@ public class QuizManager : MonoBehaviour
 
         if (index == correctAnswerIndex)
         {
-            buttonImage = answerButtons[index].GetComponentInChildren<Image>();
-
+            scoreKeeper.IncrementQuestionsAnsweredCorrectly();
+            currentScoreDisplay.text = "Score: " + scoreKeeper.CalculateScore(timer.GetFillFractionValue());
             currentQuestionDisplay.text = "Yay! That's correct.";
+
+            buttonImage = answerButtons[index].GetComponentInChildren<Image>();
             buttonImage.sprite = correctAnswerSprite;
+            
         } else
         {
             buttonImage = answerButtons[correctAnswerIndex].GetComponentInChildren<Image>();
