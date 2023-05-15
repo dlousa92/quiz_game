@@ -54,6 +54,7 @@ public class QuizManager : MonoBehaviour
         } 
     }
 
+    //Determines the question being pulled from our list
     void GetRandomQuestion()
     {
         int index = Random.Range(0, questions.Count);
@@ -80,7 +81,7 @@ public class QuizManager : MonoBehaviour
             buttonImage.sprite = defaultSprite;
         }
     }
-    // Checks if the answer is correct and changes ui sprite of correct answer button
+    //Checks if the answer is correct and changes ui sprite of correct answer button
     void CheckCorrectAnswer(int index)
     {
         Image buttonImage;
@@ -99,7 +100,8 @@ public class QuizManager : MonoBehaviour
             buttonImage.sprite = correctAnswerSprite;
         }
     }
-    
+
+    //Handles all function calls once an answer is selected
     public void OnAnswerSelected(int index)
     {
         CheckCorrectAnswer(index);
@@ -108,7 +110,7 @@ public class QuizManager : MonoBehaviour
         timer.CancelTimer();
     }
 
-    //disables and enables buttons in UI
+    //Disables and enables buttons in UI
     void SetButtonState(bool isInteractable)
     {
         for (int i = 0; i < answerButtons.Length; i++)
