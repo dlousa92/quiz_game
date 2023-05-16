@@ -46,4 +46,9 @@ public class ScoreKeeper : MonoBehaviour
 
         return totalScore;
     }
+
+    public int GetTotalScore()
+    {
+        return totalScore;
+    }
 }
