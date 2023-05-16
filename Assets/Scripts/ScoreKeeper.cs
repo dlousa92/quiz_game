@@ -9,16 +9,6 @@ public class ScoreKeeper : MonoBehaviour
     int questionsAnsweredCorrectly;
     int totalScore;
     [SerializeField] int timerMultiplier;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public int GetQuestionsSeen()
     {

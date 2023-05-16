@@ -27,7 +27,7 @@ public class QuizManager : MonoBehaviour
     bool completedGame;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         timer = FindObjectOfType<Timer>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -62,7 +62,10 @@ public class QuizManager : MonoBehaviour
             progressBar.value++;
             SetButtonState(true);
             SetButtonDefaultSprites();
-        } 
+        } else if (questions.Count == 0)
+        {
+            completedGame = true;
+        }
     }
 
     //Determines the question being pulled from our list
@@ -122,13 +125,12 @@ public class QuizManager : MonoBehaviour
         SetButtonState(false);
         didAnswerEarly = !didAnswerEarly;
         timer.CancelTimer();
-
-        if (progressBar.value == progressBar.maxValue)
-        {
-            completedGame = true;
-        }
     }
 
+    public bool GetCompletedGameStatus()
+    {
+        return completedGame;
+    }
     //Disables and enables buttons in UI
     void SetButtonState(bool isInteractable)
     {

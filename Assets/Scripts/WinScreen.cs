@@ -8,9 +8,14 @@ public class WinScreen : MonoBehaviour
     [SerializeField] TextMeshProUGUI finalScoreDisplay;
     ScoreKeeper scoreKeeper;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         scoreKeeper = FindAnyObjectByType<ScoreKeeper>();
+    }
+
+    void Start()
+    {
+        ShowFinalScore();
     }
 
     public void ShowFinalScore() 
